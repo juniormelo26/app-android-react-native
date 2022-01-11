@@ -1,14 +1,54 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Platform } from 'react-native';
+import { Alert, Platform, Text } from 'react-native';
 import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
-  SubmitText, Link, LinkText, ContainerText} from './styles';
+  SubmitText, Link, LinkText} from './styles';
 
 export default function Login() {
   const navigation = useNavigation();
   
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
+
+  const BASE_API = 'http://192.168.0.83:8080';
+
+  //ENVIO DO FORM LOGIN
+  async function handleLogin(){
+
+    if (usuario.trim() != '' && senha.trim() != '') {
+
+
+      const req = await fetch('http://192.168.0.83:8080/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                login: usuario,
+                password: senha  
+            })
+          
+      });
+    
+     const json = await req.json();
+     if( json.erro === true){
+      Alert.alert("ERRO", "DADOS INCORRETOS!");
+     }else{
+        navigation.reset({  
+          routes: [{ name: 'AreaRestrita' }]
+        });
+        setUsuario('');
+        setSenha('');
+     }
+    /*  console.log(json); 
+     console.log(json.erro);  */
+  }else{
+    Alert.alert("ERRO", "PREENCHA TODOS OS CAMPOS!");
+  }
+}
+
+
   return (
     <Background>
     <Container
@@ -37,7 +77,7 @@ export default function Login() {
          />
       </AreaInput>
 
-      <SubmitButton onPress={ () => {}}>
+      <SubmitButton onPress={ () => {handleLogin()}}>
         <SubmitText>Acessar</SubmitText>
       </SubmitButton>
 

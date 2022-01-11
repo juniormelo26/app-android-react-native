@@ -10,6 +10,35 @@ export default function Login() {
   const [nome, setNome] = useState('');
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
+
+
+  const BASE_API = 'http://192.168.0.83:3000';
+
+  //ENVIO DO FORM CADASTRO
+  async function handleCadastro(){
+      const req = await fetch('http://192.168.0.83:8080/cadastrar', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: nome,
+            login: usuario,
+            password: senha  
+        })
+        
+    });
+     console.log(req);
+     /* const json = await req.json();//recebe a resposta da requisição acima
+    return json;   */
+    
+  }
+
+
+
+
+
   return (
     <Background>
     <Container
@@ -47,7 +76,7 @@ export default function Login() {
          />
       </AreaInput>
 
-      <SubmitButton onPress={ () => {}}>
+      <SubmitButton onPress={ () => {handleCadastro()}}>
         <SubmitText>Cadastrar</SubmitText>
       </SubmitButton>
 
