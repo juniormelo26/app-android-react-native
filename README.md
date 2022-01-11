@@ -1,4 +1,4 @@
-# App de Login e Cadastro com banco de dados
+# App Android - Login e Cadastro com banco de dados
 
 ### React-native, Sequelize, Mysql, Express, Bcrypt, Jwt
 
