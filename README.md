@@ -36,3 +36,5 @@
 #### npm install react-native-reanimated@2.2.4 react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 #### npm install @react-navigation/stack@^5.x
 #### npm install @react-navigation/bottom-tabs@^5.x
+![APP-LOGIN](https://user-images.githubusercontent.com/22121703/157753000-47f81560-8147-49b3-a64f-aabf03b1e74e.png)
+
